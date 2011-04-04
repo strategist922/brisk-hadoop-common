@@ -4,5 +4,12 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-
+<property>
+  <name>jobtracker.thrift.address</name>
+  <value>0.0.0.0:9290</value>
+</property>
+<property>
+  <name>mapred.child.java.opts</name>
+  <value>-Xmx1024M</value>
+</property>
 </configuration>

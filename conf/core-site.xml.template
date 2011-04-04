@@ -4,5 +4,13 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
+  <property>
+    <name>fs.default.name</name>
+    <value>cassandra://localhost:9160</value>
+  </property>
 
+ <property>
+    <name>fs.cassandra.impl</name>
+    <value>org.apache.cassandra.hadoop.fs.CassandraFileSystem</value>
+ </property>
 </configuration>
