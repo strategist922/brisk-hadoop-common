@@ -2,6 +2,8 @@ Hadoop Change Log
 
 Release 0.20.203.0 - unreleased
 
+    MAPREDUCE-2355. Add a dampner to out-of-band heartbeats. (acmurthy) 
+ 
     HADOOP-7190. Add metrics v1 back for backwards compatibility. (omalley)
 
     MAPREDUCE-2360. Remove stripping of scheme, authority from submit dir in 
@@ -30,9 +32,6 @@ Release 0.20.203.0 - unreleased
     MAPREDUCE-2364. Don't hold the rjob lock while localizing resources. (ddas
     via omalley)
 
-    HDFS:1598. Directory listing on hftp:// does not show
-    .*.crc files.  (szetszwo)
-
     MAPREDUCE-2365. New counters for FileInputFormat (BYTES_READ) and 
     FileOutputFormat (BYTES_WRITTEN). 
     New counter MAP_OUTPUT_MATERIALIZED_BYTES for compressed MapOutputSize.
@@ -54,6 +53,9 @@ Release 0.20.203.0 - unreleased
 
     HADOOP-6879. Provide SSH based (Jsch) remote execution API for system
     tests. (cos)
+
+    HADOOP-7215. RPC clients must use network interface corresponding to 
+    the host in the client's kerberos principal key. (suresh)
 
 Release 0.20.202.0 - unreleased
 
