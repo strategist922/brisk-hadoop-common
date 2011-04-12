@@ -45,6 +45,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.ipc.*;
 import org.apache.hadoop.ipc.RPC.Server;
 import org.apache.hadoop.conf.*;
+import org.apache.hadoop.util.PluginDispatcher;
+import org.apache.hadoop.util.ServicePlugin;
 import org.apache.hadoop.util.StringUtils;
 import org.apache.hadoop.net.NetUtils;
 import org.apache.hadoop.net.NetworkTopology;
@@ -66,6 +68,7 @@ import java.net.*;
 import java.security.PrivilegedExceptionAction;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import org.apache.hadoop.metrics2.lib.DefaultMetricsSystem;
 
 /**********************************************************
@@ -155,6 +158,8 @@ public class NameNode implements ClientProtocol, DatanodeProtocol,
   private boolean stopRequested = false;
   /** Is service level authorization enabled? */
   private boolean serviceAuthEnabled = false;
+  /** Activated plug-ins. */
+  private PluginDispatcher<NamenodePlugin> pluginDispatcher;
   
   /** Format a new filesystem.  Destroys any filesystem that may already
    * exist at this location.  **/
@@ -286,6 +291,10 @@ public class NameNode implements ClientProtocol, DatanodeProtocol,
       serviceRpcServer.start();      
     }
     startTrashEmptier(conf);
+    
+    pluginDispatcher = PluginDispatcher.createFromConfiguration(
+      conf, "dfs.namenode.plugins", NamenodePlugin.class);
+    pluginDispatcher.dispatchStart(this);
   }
 
   private void startTrashEmptier(Configuration conf) throws IOException {
@@ -456,6 +465,9 @@ public class NameNode implements ClientProtocol, DatanodeProtocol,
     if (stopRequested)
       return;
     stopRequested = true;
+    if (pluginDispatcher != null) {
+      pluginDispatcher.dispatchStop();
+    }
     try {
       if (httpServer != null) httpServer.stop();
     } catch (Exception e) {

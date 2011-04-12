@@ -107,7 +107,10 @@ import org.apache.hadoop.security.token.Token;
 import org.apache.hadoop.security.token.TokenIdentifier;
 import org.apache.hadoop.util.Daemon;
 import org.apache.hadoop.util.DiskChecker;
+import org.apache.hadoop.util.PluginDispatcher;
 import org.apache.hadoop.util.ReflectionUtils;
+import org.apache.hadoop.util.ServicePlugin;
+import org.apache.hadoop.util.SingleArgumentRunnable;
 import org.apache.hadoop.util.StringUtils;
 import org.apache.hadoop.util.VersionInfo;
 import org.apache.hadoop.util.DiskChecker.DiskErrorException;
@@ -221,6 +224,9 @@ public class DataNode extends Configured
   
   public DataBlockScanner blockScanner = null;
   public Daemon blockScannerThread = null;
+  
+  /** Activated plug-ins. */
+  private PluginDispatcher<DatanodePlugin> pluginDispatcher;
   
   private static final Random R = new Random();
   
@@ -460,6 +466,10 @@ public class DataNode extends Configured
     dnRegistration.setIpcPort(ipcServer.getListenerAddress().getPort());
 
     LOG.info("dnRegistration = " + dnRegistration);
+    
+    pluginDispatcher = PluginDispatcher.createFromConfiguration(
+      conf, "dfs.datanode.plugins", DatanodePlugin.class);
+    pluginDispatcher.dispatchStart(this);
   }
   
   private ObjectName mxBean = null;
@@ -641,6 +651,7 @@ public class DataNode extends Configured
         } catch (InterruptedException ie) {}
       }
     }
+
     assert ("".equals(storage.getStorageID()) 
             && !"".equals(dnRegistration.getStorageID()))
             || storage.getStorageID().equals(dnRegistration.getStorageID()) :
@@ -689,6 +700,10 @@ public class DataNode extends Configured
    */
   public void shutdown() {
     this.unRegisterMXBean();
+    if (pluginDispatcher != null) {
+      pluginDispatcher.dispatchStop();
+    }
+
     if (infoServer != null) {
       try {
         infoServer.stop();
@@ -1035,6 +1050,10 @@ public class DataNode extends Configured
       LOG.info("DatanodeCommand action: DNA_REGISTER");
       if (shouldRun) {
         register();
+        pluginDispatcher.dispatchCall(
+          new SingleArgumentRunnable<DatanodePlugin>() {
+            public void run(DatanodePlugin p) { p.reregistrationComplete(); }
+          });
       }
       break;
     case DatanodeProtocol.DNA_FINALIZE:
@@ -1376,6 +1395,10 @@ public class DataNode extends Configured
     if (dn != null) {
       //register datanode
       dn.register();
+      dn.pluginDispatcher.dispatchCall(
+        new SingleArgumentRunnable<DatanodePlugin>() {
+          public void run(DatanodePlugin p) { p.initialRegistrationComplete(); }
+        });
       dn.dataNodeThread = new Thread(dn, dnThreadName);
       dn.dataNodeThread.setDaemon(true); // needed for JUnit testing
       dn.dataNodeThread.start();
