@@ -1006,6 +1006,24 @@
       <antcall target="checkfailure"/>
     </sequential>
   </macrodef>
+	
+	<target name="ensure-test-name" unless="test">
+	    <fail message="You must run this target with -Dtest=TestName"/>
+	</target>
+	
+	<target name="runtest" description="Runs the test you specify on the command 
+	    line with -Dtest=" depends="jar-test, ensure-test-name">
+	    <junit printsummary="withOutAndErr" fork="yes"> 
+	    	  <jvmarg value="-verbose"/>
+	        <classpath refid="${test.classpath.id}" />
+	        <formatter type="plain" usefile="false"/>
+	        <batchtest>
+	            <fileset dir="${test.src.dir}">
+	                <include name="**/${test}.java"/>
+	            </fileset>
+	        </batchtest>
+	    </junit>
+	</target>
 
   <target name="test-core" depends="test-commit, test-smoke,
     test-core-excluding-commit-and-smoke,
