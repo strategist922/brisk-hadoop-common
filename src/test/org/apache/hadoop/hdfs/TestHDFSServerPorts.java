@@ -155,8 +155,11 @@ public class TestHDFSServerPorts extends TestCase {
   }
 
   public void testNameNodePorts() throws Exception {
+	System.out.println("Start testNameNodePorts and run runTestNameNodePorts(false) ...");
     runTestNameNodePorts(false);
+    System.out.println("run runTestNameNodePorts(true) ...");
     runTestNameNodePorts(true);
+    System.out.println("DONE testNameNodePorts....");
   }
 
   /**
@@ -167,6 +170,8 @@ public class TestHDFSServerPorts extends TestCase {
     try {
       nn = startNameNode(withService);
 
+      System.out.println("Started NameNode...");
+      
       // start another namenode on the same port
       Configuration conf2 = new Configuration(config);
       conf2.set("dfs.name.dir", new File(hdfsDir, "name2").getPath());
