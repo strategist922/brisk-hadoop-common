@@ -1014,7 +1014,7 @@
 	<target name="runtest" description="Runs the test you specify on the command 
 	    line with -Dtest=" depends="jar-test, ensure-test-name">
 	    <junit printsummary="withOutAndErr" fork="yes"> 
-	    	  <jvmarg value="-verbose"/>
+	    	  <jvmarg value="-verbose -client"/>
 	        <classpath refid="${test.classpath.id}" />
 	        <formatter type="plain" usefile="false"/>
 	        <batchtest>
