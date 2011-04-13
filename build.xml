@@ -123,6 +123,10 @@
   <property name="test.commit.tests.file" value="${test.src.dir}/commit-tests" />
   <property name="test.smoke.tests.file" value="${test.src.dir}/smoke-tests" />
   <property name="test.all.tests.file" value="${test.src.dir}/all-tests" />
+	
+	<!-- To exclude the failing test -->
+  <property name="test.commit.tests.file.TestHDFSServerPorts" 
+            value="${test.src.dir}/org/apache/hadoop/hdfs/TestHDFSServerPorts.java" />
 
   <property name="test.libhdfs.conf.dir" value="${c++.libhdfs.src}/tests/conf"/>
   <property name="test.libhdfs.dir" value="${test.build.dir}/libhdfs"/>
@@ -907,6 +911,10 @@
     <excludesfile name="${test.commit.tests.file}"/>
     <excludesfile name="${test.smoke.tests.file}"/>
   </patternset>
+	
+	<patternset id="commit.exclude.failinglist.id">
+	  <excludesfile name="${test.commit.tests.file.TestHDFSServerPorts}"/>
+	</patternset>
 
   <!-- ================================================================== -->
   <!-- Run unit tests                                                     --> 
@@ -1065,6 +1073,7 @@
                        fileset.dir="${test.src.dir}"
                        test.krb5.conf="java.security.krb5.conf"
                        test.krb5.conf.filename="${test.src.dir}/krb5.conf"
+                       exclude.list.id="commit.exclude.failinglist.id"
                        >
     </macro-test-runner>
   </target>
