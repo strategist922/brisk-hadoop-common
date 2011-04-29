@@ -202,7 +202,7 @@
     value="${mvnrepo}${tsk.org}${ant-task.version}/maven-ant-tasks-${ant-task.version}.jar"/>
   <property name="repo" value="datastax-snapshot"/>
   <property name="asfsnapshotrepo" 
-    value="${asfrepo}/content/repositories/datastax-snapshot"/> 
+    value="${asfrepo}/content/repositories/snapshots"/> 
   <property name="asfstagingrepo"
     value="${asfrepo}/service/local/staging/deploy/maven2"/> 
   <property name="ivysettings.xml" location="${ivy.dir}/ivysettings.xml"/>
