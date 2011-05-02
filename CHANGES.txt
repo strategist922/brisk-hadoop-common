@@ -2,8 +2,20 @@ Hadoop Change Log
 
 Release 0.20.203.0 - unreleased
 
-    MAPREDUCE-2355. Add a dampner to out-of-band heartbeats. (acmurthy) 
- 
+    HADOOP-7253. Update the default configuration to fix security audit log
+    and metrics2 property configuration warnings. (omalley)
+
+    HADOOP-7247. Update documentation to match current jar names. (omalley)
+
+    HADOOP-7246. Update the log4j configuration to match the EventCounter
+    package. (Luke Lu via omalley)
+
+    HADOOP-7143. Restore HadoopArchives. (Joep Rottinghuis via omalley)
+
+    MAPREDUCE-2316. Updated CapacityScheduler documentation. (acmurthy) 
+
+    HADOOP-7243. Fix contrib unit tests missing dependencies. (omalley)
+
     HADOOP-7190. Add metrics v1 back for backwards compatibility. (omalley)
 
     MAPREDUCE-2360. Remove stripping of scheme, authority from submit dir in 
@@ -56,6 +68,11 @@ Release 0.20.203.0 - unreleased
 
     HADOOP-7215. RPC clients must use network interface corresponding to 
     the host in the client's kerberos principal key. (suresh)
+
+    HDFS-1842. Change the layout version to -31 to disallow upgrade from
+    and to 0.21 release. (suresh)
+
+    HADOOP-7232. Fix Javadoc warnings. (omalley)
 
 Release 0.20.202.0 - unreleased
 
