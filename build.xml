@@ -2252,7 +2252,7 @@
      output.file="${hadoop-streaming.pom}.asc" gpg.passphrase="${gpg.passphrase}"/>
   </target>
 
-  <target name="simpledeploy" unless="staging">
+  <target name="simpledeploy" unless="staging" depends="mvn-install">
      <artifact:pom file="${hadoop-core.pom}" id="hadoop.core"/>
      <artifact:pom file="${hadoop-test.pom}" id="hadoop.test"/>
      <artifact:pom file="${hadoop-examples.pom}" id="hadoop.examples"/>
