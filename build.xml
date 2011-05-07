@@ -238,6 +238,7 @@
     location="${ivy.dir}/hadoop-streaming-pom-template.xml"/>
   <property name="hadoop-streaming.jar" 
     location="${build.dir}/contrib/streaming/${streaming.final.name}.jar"/>
+  <property name="settings.file" value="${user.home}/.m2/settings.xml"/>
    
   <!--this is the naming policy for artifacts we want pulled down-->
   <property name="ivy.artifact.retrieve.pattern" 
@@ -2177,31 +2178,31 @@
      <artifact:pom file="${hadoop-streaming.pom}" id="hadoop.streaming"/>
      <artifact:install-provider artifactId="wagon-http"
        version="${wagon-http.version}"/>
-     <artifact:deploy file="${hadoop-core.jar}">
+     <artifact:deploy file="${hadoop-core.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/>
          <pom refid="hadoop.core"/>
          <attach file="${hadoop-core.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-core.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-test.jar}">
+     <artifact:deploy file="${hadoop-test.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.core.test"/>
          <attach file="${hadoop-test.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-test.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-tools.jar}">
+     <artifact:deploy file="${hadoop-tools.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.tools"/>
          <attach file="${hadoop-tools.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-tools.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-examples.jar}">
+     <artifact:deploy file="${hadoop-examples.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.examples"/>
          <attach file="${hadoop-examples.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-examples.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-streaming.jar}">
+     <artifact:deploy file="${hadoop-streaming.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.streaming"/>
          <attach file="${hadoop-streaming.jar}.asc" type="jar.asc"/>
@@ -2259,23 +2260,23 @@
      <artifact:pom file="${hadoop-tools.pom}" id="hadoop.tools"/>
      <artifact:pom file="${hadoop-streaming.pom}" id="hadoop.streaming"/>
      <artifact:install-provider artifactId="wagon-http" version="${wagon-http.version}"/>
-     <artifact:deploy file="${hadoop-core.jar}">
+     <artifact:deploy file="${hadoop-core.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.core"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-test.jar}">
+     <artifact:deploy file="${hadoop-test.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.test"/>
      </artifact:deploy> 
-     <artifact:deploy file="${hadoop-examples.jar}">
+     <artifact:deploy file="${hadoop-examples.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.examples"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-tools.jar}">
+     <artifact:deploy file="${hadoop-tools.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.tools"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-streaming.jar}">
+     <artifact:deploy file="${hadoop-streaming.jar}" settingsFile="${settings.file}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.streaming"/>
      </artifact:deploy>
