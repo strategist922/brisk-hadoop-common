@@ -2177,31 +2177,31 @@
      <artifact:pom file="${hadoop-streaming.pom}" id="hadoop.streaming"/>
      <artifact:install-provider artifactId="wagon-http"
        version="${wagon-http.version}"/>
-     <artifact:deploy file="${hadoop-core.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-core.jar}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/>
          <pom refid="hadoop.core"/>
          <attach file="${hadoop-core.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-core.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-test.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-test.jar}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.core.test"/>
          <attach file="${hadoop-test.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-test.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-tools.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-tools.jar}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.tools"/>
          <attach file="${hadoop-tools.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-tools.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-examples.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-examples.jar}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.examples"/>
          <attach file="${hadoop-examples.jar}.asc" type="jar.asc"/>
          <attach file="${hadoop-examples.pom}.asc" type="pom.asc"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-streaming.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-streaming.jar}">
          <remoteRepository id="datastax.staging.https" url="${asfstagingrepo}"/> 
          <pom refid="hadoop.streaming"/>
          <attach file="${hadoop-streaming.jar}.asc" type="jar.asc"/>
@@ -2258,25 +2258,24 @@
      <artifact:pom file="${hadoop-examples.pom}" id="hadoop.examples"/>
      <artifact:pom file="${hadoop-tools.pom}" id="hadoop.tools"/>
      <artifact:pom file="${hadoop-streaming.pom}" id="hadoop.streaming"/>
-
      <artifact:install-provider artifactId="wagon-http" version="${wagon-http.version}"/>
-     <artifact:deploy file="${hadoop-core.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-core.jar}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.core"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-test.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-test.jar}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.test"/>
      </artifact:deploy> 
-     <artifact:deploy file="${hadoop-examples.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-examples.jar}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.examples"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-tools.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-tools.jar}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.tools"/>
      </artifact:deploy>
-     <artifact:deploy file="${hadoop-streaming.jar}" settingsFile="${basedir}/settings.xml">
+     <artifact:deploy file="${hadoop-streaming.jar}">
          <remoteRepository id="datastax-snapshot" url="${asfsnapshotrepo}"/>
          <pom refid="hadoop.streaming"/>
      </artifact:deploy>
