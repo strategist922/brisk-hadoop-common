@@ -17,17 +17,17 @@
 #
 
 #
-# configure.ac for hadoop native code. 
+# configure.ac for hadoop native code.
 #
 
-# Notes: 
+# Notes:
 # 1. This configure.ac depends on the following environment variables to function correctly:
-#    * HADOOP_NATIVE_SRCDIR 
+#    * HADOOP_NATIVE_SRCDIR
 #    * JAVA_HOME
 #    * JVM_DATA_MODEL
 #    * OS_NAME
-#    * OS_ARCH 
-#    All these are setup by build.xml. 
+#    * OS_ARCH
+#    All these are setup by build.xml.
 
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
@@ -60,7 +60,7 @@ ldflags_bak=$LDFLAGS
 LDFLAGS="$LDFLAGS $JNI_LDFLAGS"
 AC_CHECK_LIB([jvm], [JNI_GetCreatedJavaVMs])
 LDFLAGS=$ldflags_bak
-AC_SUBST([JNI_LDFLAGS])
+AC_SUBST(JNI_LDFLAGS)
 
 # Checks for header files.
 dnl Check for Ansi C headers
@@ -82,7 +82,7 @@ cppflags_bak=$CPPFLAGS
 CPPFLAGS="$CPPFLAGS $JNI_CPPFLAGS"
 AC_CHECK_HEADERS([jni.h], [], AC_MSG_ERROR([Native java headers not found. Is \$JAVA_HOME set correctly?]))
 CPPFLAGS=$cppflags_bak
-AC_SUBST([JNI_CPPFLAGS])
+AC_SUBST(JNI_CPPFLAGS)
 
 dnl Check for zlib headers
 AC_CHECK_HEADERS([zlib.h zconf.h], AC_COMPUTE_NEEDED_DSO(z,HADOOP_ZLIB_LIBRARY), AC_MSG_ERROR(Zlib headers were not found... native-hadoop library needs zlib to build. Please install the requisite zlib development package.))

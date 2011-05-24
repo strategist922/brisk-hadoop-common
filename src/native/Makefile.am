@@ -31,11 +31,12 @@
 # Export $(PLATFORM) to prevent proliferation of sub-shells
 export PLATFORM = $(shell echo $$OS_NAME | tr [A-Z] [a-z])
 
-AM_CPPFLAGS = @JNI_CPPFLAGS@ -I$(HADOOP_NATIVE_SRCDIR)/src \
+AM_CPPFLAGS = $(JNI_CPPFLAGS) -I$(HADOOP_NATIVE_SRCDIR)/src \
               -Isrc/org/apache/hadoop/io/compress/zlib \
               -Isrc/org/apache/hadoop/io/nativeio \
-              -Isrc/org/apache/hadoop/security
-AM_LDFLAGS = @JNI_LDFLAGS@ -m$(JVM_DATA_MODEL)
+              -Isrc/org/apache/hadoop/security \
+              -Isrc/org/apache/hadoop/process
+AM_LDFLAGS = -L$(JAVA_HOME)/jre/lib/$(OS_ARCH)/server -m$(JVM_DATA_MODEL)
 AM_CFLAGS = -g -Wall -fPIC -O2 -m$(JVM_DATA_MODEL)
 
 lib_LTLIBRARIES = libhadoop.la
@@ -46,8 +47,10 @@ libhadoop_la_SOURCES = src/org/apache/hadoop/io/compress/zlib/ZlibCompressor.c \
                        src/org/apache/hadoop/security/JniBasedUnixGroupsNetgroupMapping.c \
                        src/org/apache/hadoop/io/nativeio/file_descriptor.c \
                        src/org/apache/hadoop/io/nativeio/errno_enum.c \
-                       src/org/apache/hadoop/io/nativeio/NativeIO.c
-libhadoop_la_LDFLAGS = -version-info 1:0:0
+                       src/org/apache/hadoop/io/nativeio/NativeIO.c \
+                       src/org/apache/hadoop/process/binrunner.c \
+                       src/org/apache/hadoop/process/jlinuxfork.c
+libhadoop_la_LDFLAGS = -version-info 1:0:0 @JNI_LDFLAGS@
 libhadoop_la_LIBADD = -ldl -ljvm
 
 #
